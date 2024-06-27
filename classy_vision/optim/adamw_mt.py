@@ -7,6 +7,7 @@
 from typing import Any, Dict, Tuple
 
 import torch.optim
+from torch.optim import _multi_tensor
 
 from . import ClassyOptimizer, register_optimizer
 
@@ -30,7 +31,7 @@ class AdamWMT(ClassyOptimizer):
         self._amsgrad = amsgrad
 
     def prepare(self, param_groups) -> None:
-        self.optimizer = torch.optim._multi_tensor.AdamW(
+        self.optimizer = _multi_tensor.AdamW(
             param_groups,
             lr=self._lr,
             betas=self._betas,
